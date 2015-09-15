@@ -11,19 +11,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import nl.jeroen_nieuwenhuis.faceosccomputercontrol.gui.TriggerSettingsController;
+import nl.jeroen_nieuwenhuis.faceosccomputercontrol.model.Face;
 import nl.jeroen_nieuwenhuis.faceosccomputercontrol.osc.LeftEyebrowListener;
+import nl.jeroen_nieuwenhuis.faceosccomputercontrol.osc.MouthHeightListener;
+import nl.jeroen_nieuwenhuis.faceosccomputercontrol.osc.RightEyebrowListener;
 
 
 public class MainApp extends Application {
     
     TriggerSettingsController triggerSettingsController;
+    public Face face;
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+        face = new Face();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
+        Parent root = fxmlLoader.load();
         
         triggerSettingsController = (TriggerSettingsController) fxmlLoader.getController();
+        triggerSettingsController.setApp(this);
         
         Scene scene = new Scene(root);
         
@@ -40,6 +47,9 @@ public class MainApp extends Application {
         try {
             OSCPortIn receiver = new OSCPortIn(8338);
             receiver.addListener("/gesture/eyebrow/left", new LeftEyebrowListener(this));
+            receiver.addListener("/gesture/eyebrow/right", new RightEyebrowListener(this));
+            receiver.addListener("/gesture/mouth/height", new MouthHeightListener(this));
+
             
             receiver.startListening();
         } catch (SocketException ex) {
@@ -48,7 +58,13 @@ public class MainApp extends Application {
     }
     
     public void updateLeftEyebrowCurrent(float value){
-        triggerSettingsController.leftBrowCurrent.setText((value+"").substring(0, 3));
+        triggerSettingsController.updateLeftEyebrowCurrent((value+"").substring(0, 3));
+    }
+    public void updateRightEyebrowCurrent(float value){
+        triggerSettingsController.updateRightEyebrowCurrent((value+"").substring(0, 3));
+    }
+    public void updateMouthHeightCurrent(float value){
+        triggerSettingsController.updateMouthHeightCurrent((value+"").substring(0, 3));
     }
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
