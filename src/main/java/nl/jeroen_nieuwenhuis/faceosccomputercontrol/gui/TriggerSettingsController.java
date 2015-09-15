@@ -2,6 +2,7 @@ package nl.jeroen_nieuwenhuis.faceosccomputercontrol.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -42,14 +43,29 @@ public class TriggerSettingsController implements Initializable {
     }
     
     
-    public void updateLeftEyebrowCurrent(String value){
-        leftBrowCurrent.setText(value);
+    public void updateLeftEyebrowCurrent(final String value){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                leftBrowCurrent.setText(value);
+            }
+        });
+        
     }
-    public void updateRightEyebrowCurrent(String value){
-        rightBrowCurrent.setText(value);
+    public void updateRightEyebrowCurrent(final String value){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                rightBrowCurrent.setText(value);
+            }
+        });
+        
     }
-    public void updateMouthHeightCurrent(String value){
-        mouthHeightCurrent.setText(value);
+    public void updateMouthHeightCurrent(final String value){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                mouthHeightCurrent.setText(value);
+            }
+        });
+        
     }
     
     @Override
