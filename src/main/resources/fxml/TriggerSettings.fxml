@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="381.0" prefWidth="480.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="nl.jeroen_nieuwenhuis.faceosccomputercontrol.gui.TriggerSettingsController">
+  <children>
+    <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
+    <TextField id="" fx:id="leftBrowCurrent" editable="false" layoutX="387.0" layoutY="114.0" prefWidth="69.0" />
+    <TextField id="" fx:id="rightBrowCurrent" editable="false" layoutX="387.0" layoutY="167.0" prefWidth="69.0" />
+    <Label layoutX="377.0" layoutY="80.0" text="Current value" wrapText="true" />
+    <Label layoutX="26.0" layoutY="117.0" text="Left eyebrow" />
+    <Label layoutX="23.0" layoutY="170.0" prefWidth="100.0" text="Right eyebrow" />
+    <TextField id="" fx:id="leftEyebrowUp" editable="true" layoutX="279.0" layoutY="114.0" prefWidth="69.0" />
+    <TextField id="" fx:id="rightEyebrowUp" editable="true" layoutX="279.0" layoutY="167.0" prefWidth="69.0" />
+    <TextField id="" fx:id="leftEyebrowDown" editable="true" layoutX="171.0" layoutY="114.0" prefWidth="69.0" />
+    <TextField id="" fx:id="rightEyebrowDown" editable="true" layoutX="171.0" layoutY="167.0" prefWidth="69.0" />
+    <Label layoutX="284.0" layoutY="80.0" text="Move up" textAlignment="LEFT" textOverrun="ELLIPSIS" wrapText="true" />
+    <Label layoutX="163.0" layoutY="80.0" text="Move down" />
+    <Label layoutX="198.0" layoutY="36.0" text="Eyebrow settings" />
+    <Label id="label" layoutX="130.0" layoutY="324.0" minHeight="16.0" minWidth="69.0" />
+    <TextField id="" fx:id="mouthHeightCurrent" editable="false" layoutX="391.0" layoutY="318.0" prefWidth="69.0" />
+    <Label layoutX="381.0" layoutY="284.0" text="Current value" wrapText="true" />
+    <Label layoutX="27.0" layoutY="321.0" prefWidth="79.0" text="Mouth" />
+    <TextField fx:id="mouthClosed" editable="true" layoutX="283.0" layoutY="318.0" prefWidth="69.0" />
+    <TextField fx:id="mouthOpen" editable="true" layoutX="175.0" layoutY="318.0" prefWidth="69.0" />
+    <Label layoutX="272.0" layoutY="284.0" text="Mouth closed" textAlignment="LEFT" textOverrun="ELLIPSIS" wrapText="true" />
+    <Label layoutX="170.0" layoutY="284.0" text="Mouth open" />
+    <Label layoutX="202.0" layoutY="240.0" text="Mouth settings" />
+  </children>
+</AnchorPane>

@@ -1,9 +1,12 @@
 nl\jeroen_nieuwenhuis\faceosccomputercontrol\Main$1.class
 nl\jeroen_nieuwenhuis\faceosccomputercontrol\gui\TriggerSettingsController$3.class
+nl\jeroen_nieuwenhuis\faceosccomputercontrol\KeyPresser\KeyPresser.class
 nl\jeroen_nieuwenhuis\faceosccomputercontrol\model\Trigger.class
 nl\jeroen_nieuwenhuis\faceosccomputercontrol\osc\RightEyebrowListener.class
+nl\jeroen_nieuwenhuis\faceosccomputercontrol\KeyPresser\KeyPressConfiguration.class
 nl\jeroen_nieuwenhuis\faceosccomputercontrol\model\Face.class
 nl\jeroen_nieuwenhuis\faceosccomputercontrol\gui\TriggerSettingsController$5.class
+nl\jeroen_nieuwenhuis\faceosccomputercontrol\gui\KeyPresserController.class
 nl\jeroen_nieuwenhuis\faceosccomputercontrol\gui\TriggerSettingsController$4.class
 nl\jeroen_nieuwenhuis\faceosccomputercontrol\osc\OSCPortInNotDamon.class
 nl\jeroen_nieuwenhuis\faceosccomputercontrol\Main.class

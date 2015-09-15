@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import nl.jeroen_nieuwenhuis.faceosccomputercontrol.gui.KeyPresserController;
 import nl.jeroen_nieuwenhuis.faceosccomputercontrol.gui.TriggerSettingsController;
 import nl.jeroen_nieuwenhuis.faceosccomputercontrol.model.Face;
 import nl.jeroen_nieuwenhuis.faceosccomputercontrol.osc.LeftEyebrowListener;
@@ -26,21 +27,36 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
         face = new Face();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/TriggerSettings.fxml"));
         Parent root = fxmlLoader.load();
-        
+ 
         triggerSettingsController = (TriggerSettingsController) fxmlLoader.getController();
         triggerSettingsController.setApp(this);
         
         Scene scene = new Scene(root);
-        
         scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("FaceOSC Computer Control");
+        stage.setTitle("Trigger settings");
         stage.setScene(scene);
         stage.show();
         
+        showKeyPresserStage();
         startOSCListeners();
+    }
+    
+    public void showKeyPresserStage() throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/KeyPresser.fxml"));
+        Parent root = fxmlLoader.load();
+        
+        KeyPresserController KeyPresserController = (KeyPresserController) fxmlLoader.getController();
+        KeyPresserController.setApp(this);
+        
+        Scene scene = new Scene(root);
+        
+        scene.getStylesheets().add("/styles/Styles.css");
+        Stage stage = new Stage();
+        stage.setTitle("Trigger settings");
+        stage.setScene(scene);
+        stage.show();
     }
     
     public void startOSCListeners(){
