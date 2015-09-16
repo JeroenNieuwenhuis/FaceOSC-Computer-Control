@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="381.0" prefWidth="480.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="nl.jeroen_nieuwenhuis.faceosccomputercontrol.gui.TriggerSettingsController">
+<AnchorPane id="AnchorPane" prefHeight="442.0" prefWidth="480.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="nl.jeroen_nieuwenhuis.faceosccomputercontrol.gui.TriggerSettingsController">
   <children>
     <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
     <TextField id="" fx:id="leftBrowCurrent" editable="false" layoutX="387.0" layoutY="114.0" prefWidth="69.0" />
@@ -30,5 +30,7 @@
     <Label layoutX="272.0" layoutY="284.0" text="Mouth closed" textAlignment="LEFT" textOverrun="ELLIPSIS" wrapText="true" />
     <Label layoutX="170.0" layoutY="284.0" text="Mouth open" />
     <Label layoutX="202.0" layoutY="240.0" text="Mouth settings" />
+    <Button fx:id="enableButton" layoutX="23.0" layoutY="372.0" mnemonicParsing="false" text="Enable/disable triggers" />
+    <Label fx:id="enableText" layoutX="226.0" layoutY="376.0" text="Triggers disabled" />
   </children>
 </AnchorPane>

@@ -16,6 +16,12 @@ public class KeyPressConfiguration {
     private boolean leftBrowDownEnabled;
     private boolean rightBrowUpEnabled;
     private boolean rightBrowDownEnabled;
+    
+    private boolean leftBrowUpReleasedEnabled;
+    private boolean leftBrowDownReleasedEnabled;
+    private boolean rightBrowUpReleasedEnabled;
+    private boolean rightBrowDownReleasedEnabled;
+    
     private boolean mouthOpenEnabled;
     private boolean mouthClosedEnabled;
     
@@ -23,6 +29,12 @@ public class KeyPressConfiguration {
     private char leftBrowDownChar;
     private char rightBrowUpChar;
     private char rightBrowDownChar;
+    
+    private char leftBrowUpReleasedChar;
+    private char leftBrowDownReleasedChar;
+    private char rightBrowUpReleasedChar;
+    private char rightBrowDownReleasedChar;
+    
     private char mouthOpenChar;
     private char mouthClosedChar;
     
@@ -36,6 +48,70 @@ public class KeyPressConfiguration {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isLeftBrowUpReleasedEnabled() {
+        return leftBrowUpReleasedEnabled;
+    }
+
+    public void setLeftBrowUpReleasedEnabled(boolean leftBrowUpReleasedEnabled) {
+        this.leftBrowUpReleasedEnabled = leftBrowUpReleasedEnabled;
+    }
+
+    public boolean isLeftBrowDownReleasedEnabled() {
+        return leftBrowDownReleasedEnabled;
+    }
+
+    public void setLeftBrowDownReleasedEnabled(boolean leftBrowDownReleasedEnabled) {
+        this.leftBrowDownReleasedEnabled = leftBrowDownReleasedEnabled;
+    }
+
+    public boolean isRightBrowUpReleasedEnabled() {
+        return rightBrowUpReleasedEnabled;
+    }
+
+    public void setRightBrowUpReleasedEnabled(boolean rightBrowUpReleasedEnabled) {
+        this.rightBrowUpReleasedEnabled = rightBrowUpReleasedEnabled;
+    }
+
+    public boolean isRightBrowDownReleasedEnabled() {
+        return rightBrowDownReleasedEnabled;
+    }
+
+    public void setRightBrowDownReleasedEnabled(boolean rightBrowDownReleasedEnabled) {
+        this.rightBrowDownReleasedEnabled = rightBrowDownReleasedEnabled;
+    }
+
+    public char getLeftBrowUpReleasedChar() {
+        return leftBrowUpReleasedChar;
+    }
+
+    public void setLeftBrowUpReleasedChar(char leftBrowUpReleasedChar) {
+        this.leftBrowUpReleasedChar = leftBrowUpReleasedChar;
+    }
+
+    public char getLeftBrowDownReleasedChar() {
+        return leftBrowDownReleasedChar;
+    }
+
+    public void setLeftBrowDownReleasedChar(char leftBrowDownReleasedChar) {
+        this.leftBrowDownReleasedChar = leftBrowDownReleasedChar;
+    }
+
+    public char getRightBrowUpReleasedChar() {
+        return rightBrowUpReleasedChar;
+    }
+
+    public void setRightBrowUpReleasedChar(char rightBrowUpReleasedChar) {
+        this.rightBrowUpReleasedChar = rightBrowUpReleasedChar;
+    }
+
+    public char getRightBrowDownReleasedChar() {
+        return rightBrowDownReleasedChar;
+    }
+
+    public void setRightBrowDownReleasedChar(char rightBrowDownReleasedChar) {
+        this.rightBrowDownReleasedChar = rightBrowDownReleasedChar;
     }
 
     public boolean isLeftBrowUpEnabled() {

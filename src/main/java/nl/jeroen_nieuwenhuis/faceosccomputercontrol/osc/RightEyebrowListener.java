@@ -8,7 +8,9 @@ package nl.jeroen_nieuwenhuis.faceosccomputercontrol.osc;
 import com.illposed.osc.OSCListener;
 import com.illposed.osc.OSCMessage;
 import java.util.Date;
+import nl.jeroen_nieuwenhuis.faceosccomputercontrol.KeyPresser.KeyPresser;
 import nl.jeroen_nieuwenhuis.faceosccomputercontrol.MainApp;
+import nl.jeroen_nieuwenhuis.faceosccomputercontrol.model.Face;
 
 /**
  *
@@ -16,15 +18,17 @@ import nl.jeroen_nieuwenhuis.faceosccomputercontrol.MainApp;
  */
 public class RightEyebrowListener implements OSCListener {
     
-    MainApp app;
+    Face face;
+    KeyPresser presser;
     
-    public RightEyebrowListener(MainApp app){
-        this.app = app;
+    public RightEyebrowListener(Face face, KeyPresser presser){
+        this.face = face;
+        this.presser = presser;
     }
 
     @Override
     public void acceptMessage(Date date, OSCMessage oscm) {
-        app.updateRightEyebrowCurrent((float) oscm.getArguments().get(0));
+        presser.pressKey(face.updateRightEyebrowHeight((float) oscm.getArguments().get(0)));
     }
 
 }

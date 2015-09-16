@@ -62,29 +62,43 @@ public class KeyPresser {
         switch (trigger) {
             case LEFT_EYEBROW_UP:  
                 if (current.isLeftBrowUpEnabled()){
-                    KeyStroke ks = KeyStroke.getKeyStroke(current.getLeftBrowUpChar(), 0);
-                    int key = ks.getKeyCode();
-                    robot.keyPress(key);
-                    robot.keyRelease(key);
+                    pressKey(current.getLeftBrowUpChar());
                 }
                 break;
             case LEFT_EYEBROW_DOWN:  
-                
+                if (current.isLeftBrowDownEnabled()){
+                    pressKey(current.getLeftBrowDownChar());
+                }
                 break;
             case RIGHT_EYEBROW_UP:  
-                
+                if (current.isRightBrowUpEnabled()){
+                    pressKey(current.getRightBrowUpChar());
+              }
                 break;
             case RIGHT_EYEBROW_DOWN:  
-                
+                if (current.isRightBrowDownEnabled()){
+                    pressKey(current.getRightBrowDownChar());
+                }
                 break;
             case MOUTH_OPEN:  
-                
+                if (current.isMouthOpenEnabled()){
+                    pressKey(current.getMouthOpenChar());
+                 }
                 break;
             case MOUTH_CLOSED:  
-                
+                if (current.isMouthClosedEnabled()){
+                    pressKey(current.getMouthClosedChar());
+                }
                 break;
             case NONE:  
                 break;
         }
+    }
+    
+    private void pressKey(char ch) {
+        KeyStroke ks = KeyStroke.getKeyStroke(ch, 0);
+        int key = ks.getKeyCode();
+        robot.keyPress(key);
+        robot.keyRelease(key);
     }
 }

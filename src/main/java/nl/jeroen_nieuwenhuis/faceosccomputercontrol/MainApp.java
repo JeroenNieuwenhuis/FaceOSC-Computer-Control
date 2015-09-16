@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import nl.jeroen_nieuwenhuis.faceosccomputercontrol.KeyPresser.KeyPresser;
 import nl.jeroen_nieuwenhuis.faceosccomputercontrol.gui.KeyPresserController;
 import nl.jeroen_nieuwenhuis.faceosccomputercontrol.gui.TriggerSettingsController;
 import nl.jeroen_nieuwenhuis.faceosccomputercontrol.model.Face;
@@ -21,12 +22,13 @@ import nl.jeroen_nieuwenhuis.faceosccomputercontrol.osc.RightEyebrowListener;
 public class MainApp extends Application {
     
     TriggerSettingsController triggerSettingsController;
+    KeyPresserController keyPresserController;
     public Face face;
+    KeyPresser presser;
 
     @Override
     public void start(Stage stage) throws Exception {
-        face = new Face();
-
+        
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/TriggerSettings.fxml"));
         Parent root = fxmlLoader.load();
  
@@ -39,16 +41,18 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
         
-        showKeyPresserStage();
+        keyPresserController = showKeyPresserStage();
+        keyPresserController.init(this);
+        presser = keyPresserController.getPresser();
+        face = new Face(this, presser);
         startOSCListeners();
     }
     
-    public void showKeyPresserStage() throws Exception {
+    public KeyPresserController showKeyPresserStage() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/KeyPresser.fxml"));
         Parent root = fxmlLoader.load();
         
-        KeyPresserController KeyPresserController = (KeyPresserController) fxmlLoader.getController();
-        KeyPresserController.setApp(this);
+        KeyPresserController controller = (KeyPresserController) fxmlLoader.getController();
         
         Scene scene = new Scene(root);
         
@@ -57,20 +61,26 @@ public class MainApp extends Application {
         stage.setTitle("Trigger settings");
         stage.setScene(scene);
         stage.show();
+        
+        return controller;
     }
     
     public void startOSCListeners(){
         try {
             OSCPortIn receiver = new OSCPortIn(8338);
-            receiver.addListener("/gesture/eyebrow/left", new LeftEyebrowListener(this));
-            receiver.addListener("/gesture/eyebrow/right", new RightEyebrowListener(this));
-            receiver.addListener("/gesture/mouth/height", new MouthHeightListener(this));
+            receiver.addListener("/gesture/eyebrow/left", new LeftEyebrowListener(face, presser));
+            receiver.addListener("/gesture/eyebrow/right", new RightEyebrowListener(face, presser));
+            receiver.addListener("/gesture/mouth/height", new MouthHeightListener(face, presser));
 
             
             receiver.startListening();
         } catch (SocketException ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void setKeyPresser(KeyPresser presser){
+        this.presser = presser;
     }
     
     public void updateLeftEyebrowCurrent(float value){

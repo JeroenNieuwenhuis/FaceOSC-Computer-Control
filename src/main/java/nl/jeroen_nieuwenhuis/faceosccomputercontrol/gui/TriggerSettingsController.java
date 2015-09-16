@@ -5,12 +5,16 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import nl.jeroen_nieuwenhuis.faceosccomputercontrol.KeyPresser.KeyPressConfiguration;
 import nl.jeroen_nieuwenhuis.faceosccomputercontrol.MainApp;
 
 public class TriggerSettingsController implements Initializable {
@@ -30,6 +34,9 @@ public class TriggerSettingsController implements Initializable {
     
     @FXML private TextField mouthOpen;
     @FXML private TextField mouthClosed;
+    
+    @FXML private Button enableButton;
+    @FXML private Label enableText;
 //    @FXML
 //    private Label label;
 //    
@@ -70,9 +77,21 @@ public class TriggerSettingsController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if(leftEyebrowDown == null){
-            System.out.println("jjkjttttttttttttttt");
-        }
+        enableButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                if(app.face.isEnabled()){
+                    app.face.disable();
+                    enableText.setText("Triggers disabled");
+                } else {
+                    if(app.face.enable()){
+                        enableText.setText("Triggers enabled");
+                    } else {
+                        enableText.setText("Triggers disabled, set trigger values");
+                    }
+                }
+            }
+        });
         leftEyebrowDown.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

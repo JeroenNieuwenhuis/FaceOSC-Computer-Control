@@ -29,47 +29,86 @@ import nl.jeroen_nieuwenhuis.faceosccomputercontrol.MainApp;
  */
 public class KeyPresserController implements Initializable {
 
-    
-    @FXML private CheckBox leftBrowUpEnabled;
-    @FXML private CheckBox leftBrowDownEnabled;
-    @FXML private CheckBox rightBrowUpEnabled;
-    @FXML private CheckBox rightBrowDownEnabled;
-    @FXML private CheckBox mouthOpenEnabled;
-    @FXML private CheckBox mouthClosedEnabled;
-    
-    @FXML private TextField leftBrowUpChar;
-    @FXML private TextField leftBrowDownChar;
-    @FXML private TextField rightBrowUpChar;
-    @FXML private TextField rightBrowDownChar;
-    @FXML private TextField mouthOpenChar;
-    @FXML private TextField mouthClosedChar;
-    
-    @FXML private Button saveButton;
-    @FXML private Button newButton;
-    
-    @FXML private TextField newField;
-    @FXML private ChoiceBox configurationPicker;
-    
+    @FXML
+    private CheckBox leftBrowUpEnabled;
+    @FXML
+    private CheckBox leftBrowDownEnabled;
+    @FXML
+    private CheckBox rightBrowUpEnabled;
+    @FXML
+    private CheckBox rightBrowDownEnabled;
+    @FXML
+    private CheckBox leftBrowUpReleasedEnabled;
+    @FXML
+    private CheckBox leftBrowDownReleasedEnabled;
+    @FXML
+    private CheckBox rightBrowUpReleasedEnabled;
+    @FXML
+    private CheckBox rightBrowDownReleasedEnabled;
+    @FXML
+    private CheckBox mouthOpenEnabled;
+    @FXML
+    private CheckBox mouthClosedEnabled;
+
+    @FXML
+    private TextField leftBrowUpChar;
+    @FXML
+    private TextField leftBrowDownChar;
+    @FXML
+    private TextField rightBrowUpChar;
+    @FXML
+    private TextField rightBrowDownChar;
+    @FXML
+    private TextField leftBrowUpReleasedChar;
+    @FXML
+    private TextField leftBrowDownReleasedChar;
+    @FXML
+    private TextField rightBrowUpReleasedChar;
+    @FXML
+    private TextField rightBrowDownReleasedChar;
+    @FXML
+    private TextField mouthOpenChar;
+    @FXML
+    private TextField mouthClosedChar;
+
+    @FXML
+    private Button saveButton;
+    @FXML
+    private Button newButton;
+
+    @FXML
+    private TextField newField;
+    @FXML
+    private ChoiceBox configurationPicker;
+
     private KeyPresser presser;
     private MainApp app;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+    }
+
+    /**
+     * called from main after controller is initialized Needs to be refactored
+     */
+    public void init(MainApp app) {
+        this.app = app;
         presser = new KeyPresser();
-        
+
         configurationPicker.setItems(FXCollections.observableArrayList(presser.getConfNames()));
         configurationPicker.getSelectionModel().select(0);
-        configurationPicker.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>(){
+        configurationPicker.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 presser.setCurrent(newValue.intValue());
                 setToCurrent();
             }
         });
-        
+
         newButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -77,87 +116,143 @@ public class KeyPresserController implements Initializable {
                 if (!tekst.isEmpty()) {
                     presser.addConf(new KeyPressConfiguration(tekst));
                     configurationPicker.setItems(FXCollections.observableArrayList(presser.getConfNames()));
-                    configurationPicker.getSelectionModel().select(presser.getConfNames().size()-1);
-                    presser.setCurrent(presser.getConfNames().size()-1);
+                    configurationPicker.getSelectionModel().select(presser.getConfNames().size() - 1);
+                    presser.setCurrent(presser.getConfNames().size() - 1);
                     newField.setText("");
                     clearAll();
                 }
             }
         });
-        
+
         leftBrowUpEnabled.selectedProperty().addListener(new ChangeListener<Boolean>() {
-        public void changed(ObservableValue<? extends Boolean> ov,
-            Boolean old_val, Boolean new_val) {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                    Boolean old_val, Boolean new_val) {
                 presser.getCurrent().setLeftBrowUpEnabled(new_val);
-        }
-    });
+            }
+        });
+        leftBrowUpReleasedEnabled.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                    Boolean old_val, Boolean new_val) {
+                presser.getCurrent().setLeftBrowUpReleasedEnabled(new_val);
+            }
+        });
         leftBrowDownEnabled.selectedProperty().addListener(new ChangeListener<Boolean>() {
-        public void changed(ObservableValue<? extends Boolean> ov,
-            Boolean old_val, Boolean new_val) {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                    Boolean old_val, Boolean new_val) {
                 presser.getCurrent().setLeftBrowDownEnabled(new_val);
-        }
-    });
+            }
+        });
+        leftBrowDownReleasedEnabled.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                    Boolean old_val, Boolean new_val) {
+                presser.getCurrent().setLeftBrowDownReleasedEnabled(new_val);
+            }
+        });
         rightBrowUpEnabled.selectedProperty().addListener(new ChangeListener<Boolean>() {
-        public void changed(ObservableValue<? extends Boolean> ov,
-            Boolean old_val, Boolean new_val) {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                    Boolean old_val, Boolean new_val) {
                 presser.getCurrent().setRightBrowUpEnabled(new_val);
-        }
-    });
+            }
+        });
+        rightBrowUpReleasedEnabled.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                    Boolean old_val, Boolean new_val) {
+                presser.getCurrent().setRightBrowUpReleasedEnabled(new_val);
+            }
+        });
         rightBrowDownEnabled.selectedProperty().addListener(new ChangeListener<Boolean>() {
-        public void changed(ObservableValue<? extends Boolean> ov,
-            Boolean old_val, Boolean new_val) {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                    Boolean old_val, Boolean new_val) {
                 presser.getCurrent().setRightBrowDownEnabled(new_val);
-        }
-    });
+            }
+        });
+        rightBrowDownReleasedEnabled.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                    Boolean old_val, Boolean new_val) {
+                presser.getCurrent().setRightBrowDownReleasedEnabled(new_val);
+            }
+        });
         mouthOpenEnabled.selectedProperty().addListener(new ChangeListener<Boolean>() {
-        public void changed(ObservableValue<? extends Boolean> ov,
-            Boolean old_val, Boolean new_val) {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                    Boolean old_val, Boolean new_val) {
                 presser.getCurrent().setMouthOpenEnabled(new_val);
-        }
-    });
+            }
+        });
         mouthClosedEnabled.selectedProperty().addListener(new ChangeListener<Boolean>() {
-        public void changed(ObservableValue<? extends Boolean> ov,
-            Boolean old_val, Boolean new_val) {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                    Boolean old_val, Boolean new_val) {
                 presser.getCurrent().setMouthClosedEnabled(new_val);
-        }
-    });
-        
+            }
+        });
+
         leftBrowUpChar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.isEmpty()){
+                if (!newValue.isEmpty()) {
                     presser.getCurrent().setLeftBrowUpChar(newValue.charAt(0));
+                }
+            }
+        });
+        leftBrowUpReleasedChar.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.isEmpty()) {
+                    presser.getCurrent().setLeftBrowUpReleasedChar(newValue.charAt(0));
                 }
             }
         });
         leftBrowDownChar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.isEmpty()){
+                if (!newValue.isEmpty()) {
                     presser.getCurrent().setLeftBrowDownChar(newValue.charAt(0));
+                }
+            }
+        });
+        leftBrowDownReleasedChar.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.isEmpty()) {
+                    presser.getCurrent().setLeftBrowDownReleasedChar(newValue.charAt(0));
                 }
             }
         });
         rightBrowUpChar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.isEmpty()){
+                if (!newValue.isEmpty()) {
                     presser.getCurrent().setRightBrowUpChar(newValue.charAt(0));
+                }
+            }
+        });
+        rightBrowUpReleasedChar.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.isEmpty()) {
+                    presser.getCurrent().setRightBrowUpReleasedChar(newValue.charAt(0));
                 }
             }
         });
         rightBrowDownChar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.isEmpty()){
+                if (!newValue.isEmpty()) {
                     presser.getCurrent().setRightBrowDownChar(newValue.charAt(0));
+                }
+            }
+        });
+        rightBrowDownReleasedChar.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.isEmpty()) {
+                    presser.getCurrent().setRightBrowDownReleasedChar(newValue.charAt(0));
                 }
             }
         });
         mouthOpenChar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.isEmpty()){
+                if (!newValue.isEmpty()) {
                     presser.getCurrent().setMouthOpenChar(newValue.charAt(0));
                 }
             }
@@ -165,30 +260,30 @@ public class KeyPresserController implements Initializable {
         mouthClosedChar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.isEmpty()){
+                if (!newValue.isEmpty()) {
                     presser.getCurrent().setMouthClosedChar(newValue.charAt(0));
                 }
             }
         });
-    }    
-    
-    public void setToCurrent(){
+    }
+
+    private void setToCurrent() {
         leftBrowUpEnabled.setSelected(presser.getCurrent().isLeftBrowUpEnabled());
         leftBrowDownEnabled.setSelected(presser.getCurrent().isLeftBrowDownEnabled());
         rightBrowUpEnabled.setSelected(presser.getCurrent().isRightBrowUpEnabled());
         rightBrowDownEnabled.setSelected(presser.getCurrent().isRightBrowDownEnabled());
         mouthOpenEnabled.setSelected(presser.getCurrent().isMouthOpenEnabled());
         mouthClosedEnabled.setSelected(presser.getCurrent().isMouthClosedEnabled());
-        
-        leftBrowUpChar.setText(presser.getCurrent().getLeftBrowUpChar()+"");
-        leftBrowDownChar.setText(presser.getCurrent().getLeftBrowDownChar()+"");
-        rightBrowUpChar.setText(presser.getCurrent().getRightBrowUpChar()+"");
-        rightBrowDownChar.setText(presser.getCurrent().getRightBrowDownChar()+"");
-        mouthOpenChar.setText(presser.getCurrent().getMouthOpenChar()+"");
-        mouthClosedChar.setText(presser.getCurrent().getMouthClosedChar()+"");
+
+        leftBrowUpChar.setText(presser.getCurrent().getLeftBrowUpChar() + "");
+        leftBrowDownChar.setText(presser.getCurrent().getLeftBrowDownChar() + "");
+        rightBrowUpChar.setText(presser.getCurrent().getRightBrowUpChar() + "");
+        rightBrowDownChar.setText(presser.getCurrent().getRightBrowDownChar() + "");
+        mouthOpenChar.setText(presser.getCurrent().getMouthOpenChar() + "");
+        mouthClosedChar.setText(presser.getCurrent().getMouthClosedChar() + "");
     }
-    
-    public void clearAll() {
+
+    private void clearAll() {
         leftBrowUpEnabled.setSelected(false);
         presser.getCurrent().setLeftBrowUpEnabled(false);
         leftBrowDownEnabled.setSelected(false);
@@ -216,8 +311,12 @@ public class KeyPresserController implements Initializable {
         presser.getCurrent().setMouthClosedChar('`');
     }
 
-    public void setApp(MainApp aThis) {
+    public KeyPresser getPresser() {
+        return presser;
+    }
+
+    public void setApp(MainApp app) {
         this.app = app;
     }
-    
+
 }
