@@ -13,3 +13,6 @@ hs_err_pid*
 
 # netbeans files
 nb*.xml
+
+# maven files
+target/
