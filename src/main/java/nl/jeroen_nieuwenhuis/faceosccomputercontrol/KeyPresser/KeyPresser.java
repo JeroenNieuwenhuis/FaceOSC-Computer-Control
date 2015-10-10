@@ -234,6 +234,11 @@ public class KeyPresser {
 
         robot.keyPress(keyCodes[offset]);
         doType(keyCodes, offset + 1, length - 1);
+        try {
+            Thread.sleep(25);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KeyPresser.class.getName()).log(Level.SEVERE, null, ex);
+        }
         robot.keyRelease(keyCodes[offset]);
     }
 }
